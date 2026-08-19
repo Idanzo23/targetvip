@@ -271,35 +271,72 @@
   }
 
   /* ---------- Pains ---------- */
-  .pain-list {
+  .pains-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .pains-photo-slot {
+    height: 100%;
+    min-height: 320px;
+    background: #F1F1EC;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+  }
+
+  .pains-content {
+    text-align: center;
+  }
+
+  .pains-title {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pains-lead {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .pains-sub {
+    display: block;
+  }
+
+  .pain-grid {
     display: flex;
     flex-direction: column;
+    gap: 16px;
+    text-align: left;
   }
 
-  .pain-item {
-    display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 24px;
-    padding: 36px 0;
-    border-top: 1px solid var(--line);
+  .pain-card {
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 26px 28px;
+    transition: border-color 0.2s ease;
   }
 
-  .pain-item:last-child { border-bottom: 1px solid var(--line); }
+  .pain-card:hover {
+    border-color: var(--text);
+  }
 
   .pain-numeral {
+    display: block;
     font-family: var(--serif);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: var(--muted);
+    margin-bottom: 12px;
   }
 
-  .pain-item h3 {
-    font-size: 1.2rem;
+  .pain-card h3 {
+    font-size: 1.05rem;
     margin-bottom: 8px;
   }
 
-  .pain-item p {
+  .pain-card p {
     color: var(--muted);
-    max-width: 520px;
   }
 
   /* ---------- Approach ---------- */
@@ -490,7 +527,10 @@
 
     .included-grid { grid-template-columns: 1fr; }
 
-    .pain-item, .process-item {
+    .pains-grid { grid-template-columns: 1fr; gap: 32px; }
+    .pains-photo-slot { min-height: 220px; }
+
+    .process-item {
       grid-template-columns: 48px 1fr;
       gap: 16px;
       padding: 28px 0;
@@ -551,33 +591,28 @@
 
 <!-- 3. Боли клиента -->
 <section class="pains">
-  <div class="container">
-    <h2 class="section-title reveal">Что обычно остаётся нерешённым</h2>
-    <div class="pain-list">
-      <div class="pain-item reveal">
-        <div class="pain-numeral">I</div>
-        <div>
+  <div class="container pains-grid">
+    <div class="pains-photo-slot"></div>
+    <div class="pains-content">
+      <h2 class="section-title reveal pains-title"><span class="pains-lead">Проблемы</span><span class="pains-sub">с которыми ко мне приходят клиенты чаще всего</span></h2>
+      <div class="pain-grid">
+        <div class="pain-card reveal">
+          <span class="pain-numeral">I</span>
           <h3>Заявки есть — продаж нет</h3>
           <p>Специалист отчитывается за лиды, а не за деньги, которые они принесли.</p>
         </div>
-      </div>
-      <div class="pain-item reveal">
-        <div class="pain-numeral">II</div>
-        <div>
+        <div class="pain-card reveal">
+          <span class="pain-numeral">II</span>
           <h3>Цифры без понимания</h3>
           <p>Отчёт полон графиков, но никто не объясняет, что за ними стоит.</p>
         </div>
-      </div>
-      <div class="pain-item reveal">
-        <div class="pain-numeral">III</div>
-        <div>
+        <div class="pain-card reveal">
+          <span class="pain-numeral">III</span>
           <h3>Специалист не знает продукт</h3>
           <p>Реклама настроена технически грамотно, но говорит не на языке клиента.</p>
         </div>
-      </div>
-      <div class="pain-item reveal">
-        <div class="pain-numeral">IV</div>
-        <div>
+        <div class="pain-card reveal">
+          <span class="pain-numeral">IV</span>
           <h3>Ты один из десяти проектов</h3>
           <p>Внимание распределено между клиентами — и на вас его остаётся немного.</p>
         </div>
