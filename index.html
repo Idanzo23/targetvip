@@ -59,10 +59,7 @@
 
   section {
     padding: 120px 0;
-    border-bottom: 1px solid var(--line);
   }
-
-  section:last-of-type { border-bottom: none; }
 
   .eyebrow {
     font-size: 0.78rem;
@@ -91,15 +88,18 @@
     font-family: var(--sans);
     font-weight: 600;
     font-size: 0.95rem;
-    padding: 18px 40px;
-    border: none;
+    padding: 17px 39px;
+    border: 1px solid var(--btn-bg);
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
-    transition: opacity 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  .btn:hover { opacity: 0.85; }
+  .btn:hover {
+    background: var(--bg);
+    color: var(--btn-bg);
+  }
 
   .btn-caption {
     display: block;
@@ -135,6 +135,32 @@
     line-height: 1;
   }
 
+  .hero .surname .letter {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(0.3em);
+    animation: letter-in 0.9s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    animation-delay: calc(0.25s + var(--i) * 0.08s);
+  }
+
+  @keyframes letter-in {
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero .surname .letter {
+      animation: none;
+      opacity: 1;
+      filter: none;
+      transform: none;
+    }
+  }
+
   .hero .identity {
     margin-top: 20px;
     display: flex;
@@ -143,16 +169,23 @@
     gap: 6px;
   }
 
-  .hero .name {
-    font-size: 0.95rem;
-    color: var(--text);
-  }
-
-  .hero .role {
+  .hero .tagline {
     font-size: 0.75rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--muted);
+    opacity: 0;
+    animation: tagline-in 1.1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    animation-delay: 1.3s;
+  }
+
+  @keyframes tagline-in {
+    from { opacity: 0; letter-spacing: 0.5em; }
+    to { opacity: 1; letter-spacing: 0.16em; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero .tagline { animation: none; opacity: 1; }
   }
 
   .hero h1 {
@@ -168,17 +201,37 @@
   /* ---------- About ---------- */
   .about-grid {
     display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 72px;
-    align-items: start;
+    grid-template-columns: 1fr 560px;
+    gap: 40px 8px;
+    align-items: stretch;
+  }
+
+  .photo-frame {
+    height: 90%;
+    width: 90%;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 1s ease, transform 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .photo-frame.is-visible {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .photo-placeholder {
+    height: 100%;
     width: 100%;
-    max-width: 320px;
-    aspect-ratio: 986 / 1606;
     object-fit: contain;
+    object-position: center top;
     display: block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .photo-frame { opacity: 1; transform: none; transition: none; }
   }
 
   .about-copy .section-title { margin-bottom: 28px; }
@@ -428,7 +481,8 @@
     .container { padding: 0 24px; }
 
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .photo-placeholder { max-width: 220px; }
+    .photo-frame { height: auto; width: 100%; max-width: 280px; }
+    .photo-placeholder { height: auto; width: 100%; }
 
     .stats { grid-template-columns: 1fr; gap: 24px; }
 
@@ -451,13 +505,14 @@
 <!-- 1. Hero -->
 <section class="hero">
   <div class="container">
-    <div class="surname reveal">SAHAROV</div>
-    <div class="identity reveal">
-      <div class="name">Даниил</div>
-      <div class="role">Привлечение клиентов · ВКонтакте · Яндекс Директ</div>
+    <div class="surname" aria-label="SAHAROV">
+      <span aria-hidden="true"><span class="letter" style="--i:0">S</span><span class="letter" style="--i:1">A</span><span class="letter" style="--i:2">H</span><span class="letter" style="--i:3">A</span><span class="letter" style="--i:4">R</span><span class="letter" style="--i:5">O</span><span class="letter" style="--i:6">V</span></span>
     </div>
-    <h1 class="reveal">Реклама, за которой следят до самой оплаты — а не до заявки</h1>
-    <p class="lead reveal">Я вникаю в цифры, продукт и то, как вы видите свой бизнес, прежде чем запустить хоть один рубль в рекламу.</p>
+    <div class="identity">
+      <div class="tagline">Performance Marketing</div>
+    </div>
+    <h1 class="reveal">Я работаю с вашим бизнесом — не с вашим рекламным кабинетом</h1>
+    <p class="lead reveal">Реклама — это последний шаг. До неё я изучаю ваш рынок, конкурентов и то, где деньги теряются ещё до клика.</p>
     <a href="https://t.me/ddanyatarget23" target="_blank" rel="noopener" class="btn reveal">Бесплатная консультация</a>
     <span class="btn-caption reveal">Разбор воронки — до начала работы</span>
   </div>
@@ -466,26 +521,30 @@
 <!-- 2. О себе -->
 <section class="about">
   <div class="container about-grid">
-    <img src="photo.png" alt="Даниил Сахаров" class="photo-placeholder reveal">
     <div class="about-copy">
-      <h2 class="section-title reveal">Я не веду двадцать проектов. Я вхожу в бизнес целиком</h2>
-      <p class="reveal">Каждый проект получает моё личное внимание — от первой встречи до отчёта. Я не передаю ведение ассистентам и не масштабирую себя на десятки клиентов одновременно.</p>
-      <p class="reveal">Меня интересует не количество показов и кликов, а то, окупается ли реклама на самом деле — от объявления до денег в кассе.</p>
-      <p class="agency-line reveal">Руковожу агентством Digitalbuff.</p>
+      <h2 class="section-title reveal">Специалист по привлечению трафика. Работаю с ВКонтакте, Яндекс Директ и Авито.</h2>
+      <p class="reveal">Я прохожу весь путь клиента сам — от объявления до заявки.</p>
+      <p class="reveal">Проверяю скорость реакции на обращения, слушаю записи звонков, смотрю совпадает ли обещание в рекламе с тем, что человек видит дальше.</p>
+      <p class="reveal">Веду ограниченное число проектов, чтобы каждый получал реальное внимание.</p>
+      <p class="reveal">Вникаю в продукт, аудиторию и в то, как вы видите свой бизнес — прежде чем запустить хоть один рубль в рекламу.</p>
+      <p class="agency-line reveal">Выпускник агентства Digitalbuff (на рынке с 2018 года), за это время команда освоила:</p>
       <div class="stats">
         <div class="stat-card reveal">
-          <div class="stat-number">&gt;150 000</div>
+          <div class="stat-number">&gt;150 тыс.</div>
           <div class="stat-label">лидов</div>
         </div>
         <div class="stat-card reveal">
-          <div class="stat-number">&gt;900 000</div>
+          <div class="stat-number">&gt;900 тыс.</div>
           <div class="stat-label">подписчиков</div>
         </div>
         <div class="stat-card reveal">
-          <div class="stat-number">&gt;200 млн ₽</div>
+          <div class="stat-number">&gt;200 млн. ₽</div>
           <div class="stat-label">рекламного бюджета</div>
         </div>
       </div>
+    </div>
+    <div class="photo-frame reveal-photo">
+      <img src="photo.png" alt="Даниил Сахаров" class="photo-placeholder">
     </div>
   </div>
 </section>
@@ -648,7 +707,7 @@
 
 <script>
   // Reveal on scroll
-  const revealEls = document.querySelectorAll('.reveal');
+  const revealEls = document.querySelectorAll('.reveal, .reveal-photo');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
