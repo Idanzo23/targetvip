@@ -70,7 +70,7 @@
   }
 
   .section-title {
-    font-size: clamp(1.6rem, 3vw, 2.35rem);
+    font-size: clamp(1.9rem, 3.6vw, 2.7rem);
     margin-bottom: 56px;
     max-width: 760px;
   }
@@ -209,17 +209,21 @@
   .photo-frame {
     height: 90%;
     width: 90%;
-    overflow: hidden;
     position: relative;
     z-index: 2;
     opacity: 0;
     transform: scale(1.05);
-    transition: opacity 1s ease, transform 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 1s ease, transform 1.1s cubic-bezier(0.19, 1, 0.22, 1), width 0.4s ease, height 0.4s ease;
   }
 
   .photo-frame.is-visible {
     opacity: 1;
     transform: scale(1);
+  }
+
+  .photo-frame:hover {
+    width: 97%;
+    height: 97%;
   }
 
   .photo-placeholder {
@@ -230,8 +234,17 @@
     display: block;
   }
 
+  .pains-grid .photo-frame {
+    top: 2.5cm;
+  }
+
+  .pains-grid .photo-placeholder {
+    object-position: center bottom;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .photo-frame { opacity: 1; transform: none; transition: none; }
+    .photo-frame:hover { width: 90%; height: 90%; }
   }
 
   .about-copy .section-title { margin-bottom: 28px; }
@@ -271,19 +284,16 @@
   }
 
   /* ---------- Pains ---------- */
-  .pains-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: start;
+  .pains {
+    overflow: hidden;
   }
 
-  .pains-photo-slot {
-    height: 100%;
-    min-height: 320px;
-    background: #F1F1EC;
-    border: 1px solid var(--line);
-    border-radius: 20px;
+  .pains-grid {
+    display: grid;
+    grid-template-columns: minmax(360px, 700px) 1fr;
+    gap: 80px;
+    align-items: stretch;
+    max-width: 1240px;
   }
 
   .pains-content {
@@ -331,8 +341,8 @@
   }
 
   .pain-card h3 {
-    font-size: 1.05rem;
-    margin-bottom: 8px;
+    font-size: 1.15rem;
+    margin-bottom: 6px;
   }
 
   .pain-card p {
@@ -340,58 +350,148 @@
   }
 
   /* ---------- Approach ---------- */
+  .approach-title {
+    margin-bottom: 48px;
+    font-size: clamp(1.85rem, 3.4vw, 2.5rem);
+  }
+
   .approach-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
   }
 
+  .approach-card {
+    position: relative;
+    width: 100%;
+    padding-top: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .approach-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #E4E4DD;
+    transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .approach-grid.in .approach-card {
+    opacity: 1;
+    transform: none;
+  }
+
+  .approach-grid.in .approach-card::before {
+    width: 100%;
+  }
+
+  .approach-card:nth-child(1) { transition-delay: 0.2s; }
+  .approach-card:nth-child(2) { transition-delay: 0.4s; }
+  .approach-card:nth-child(3) { transition-delay: 0.6s; }
+
+  .approach-card:nth-child(1)::before { transition-delay: 0s; }
+  .approach-card:nth-child(2)::before { transition-delay: 0.15s; }
+  .approach-card:nth-child(3)::before { transition-delay: 0.3s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .approach-card { opacity: 1; transform: none; transition: none; }
+    .approach-card::before { width: 100%; transition: none; }
+  }
+
   .approach-card h3 {
-    font-size: 1.25rem;
+    font-family: var(--sans);
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    font-weight: 500;
     margin-bottom: 14px;
   }
 
   .approach-card p {
-    color: var(--muted);
+    color: #6E7066;
+    font-size: 15px;
   }
 
   /* ---------- Funnel audit ---------- */
+  .audit {
+    overflow: visible;
+  }
+
+  .audit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: stretch;
+    padding-right: 0;
+    overflow: visible;
+  }
+
+  .audit-photo-col {
+    position: relative;
+    overflow: visible;
+    min-height: 500px;
+  }
+
+  .audit-grid .photo-frame {
+    position: absolute;
+    top: 100px;
+    right: -120px;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+  }
+
+  .audit-grid .photo-placeholder {
+    height: auto;
+    width: 100%;
+  }
+
+  .audit-title {
+    font-size: clamp(1.7rem, 3.3vw, 2.45rem);
+  }
+
   .audit-list {
-    list-style: none;
-    max-width: 620px;
-    margin-bottom: 56px;
-  }
-
-  .audit-list li {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    padding: 18px 0;
-    border-top: 1px solid var(--line);
-    font-size: 1.02rem;
-  }
-
-  .audit-list li:last-child { border-bottom: 1px solid var(--line); }
-
-  .audit-list li::before {
-    content: "";
-    flex-shrink: 0;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    border: 1.5px solid var(--text);
-  }
-
-  .audit-highlight {
     max-width: 680px;
-    padding-top: 40px;
-    border-top: 1px solid var(--text);
+    margin-bottom: 32px;
   }
 
-  .audit-highlight p {
-    font-family: var(--serif);
-    font-size: 1.3rem;
-    line-height: 1.4;
+  .audit-item {
+    border-top: 1px solid #E4E4DD;
+    padding: 24px 0;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .audit-item h3 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 17px;
+    color: #14150F;
+    margin-bottom: 6px;
+  }
+
+  .audit-item p {
+    font-size: 15px;
+    color: #6E7066;
+  }
+
+  .audit-list.in .audit-item {
+    opacity: 1;
+    transform: none;
+  }
+
+  .audit-item:nth-child(1) { transition-delay: 0s; }
+  .audit-item:nth-child(2) { transition-delay: 0.15s; }
+  .audit-item:nth-child(3) { transition-delay: 0.3s; }
+  .audit-item:nth-child(4) { transition-delay: 0.45s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .audit-item { opacity: 1; transform: none; transition: none; }
   }
 
   /* ---------- Process ---------- */
@@ -528,7 +628,10 @@
     .included-grid { grid-template-columns: 1fr; }
 
     .pains-grid { grid-template-columns: 1fr; gap: 32px; }
-    .pains-photo-slot { min-height: 220px; }
+
+    .audit-grid { grid-template-columns: 1fr; gap: 32px; }
+    .audit-photo-col { min-height: 0; }
+    .audit-grid .photo-frame { position: static; max-width: 280px; top: auto; right: auto; }
 
     .process-item {
       grid-template-columns: 48px 1fr;
@@ -592,7 +695,9 @@
 <!-- 3. Боли клиента -->
 <section class="pains">
   <div class="container pains-grid">
-    <div class="pains-photo-slot"></div>
+    <div class="photo-frame reveal-photo">
+      <img src="photo-pains.png" alt="Даниил Сахаров" class="photo-placeholder">
+    </div>
     <div class="pains-content">
       <h2 class="section-title reveal pains-title"><span class="pains-lead">Проблемы</span><span class="pains-sub">с которыми ко мне приходят клиенты чаще всего</span></h2>
       <div class="pain-grid">
@@ -624,17 +729,17 @@
 <!-- 4. Подход -->
 <section class="approach">
   <div class="container">
-    <h2 class="section-title reveal">Я разбираю не только бизнес, но и то, как вы его видите</h2>
+    <h2 class="section-title reveal approach-title">Реклама начинается не с кабинета. Она начинается с разговора о вашем деле.</h2>
     <div class="approach-grid">
-      <div class="approach-card reveal">
-        <h3>Два–три проекта</h3>
-        <p>Полное погружение невозможно, если параллельно ведёшь десять клиентов.</p>
+      <div class="approach-card">
+        <h3>Не десять клиентов</h3>
+        <p>Два-три проекта — и полное внимание каждому. Иначе никак.</p>
       </div>
-      <div class="approach-card reveal">
+      <div class="approach-card">
         <h3>Видение владельца</h3>
         <p>Стратегия строится под ваш замысел — а не против него.</p>
       </div>
-      <div class="approach-card reveal">
+      <div class="approach-card">
         <h3>Весь путь клиента</h3>
         <p>От первого показа объявления до оплаты — а не только до заявки.</p>
       </div>
@@ -644,17 +749,32 @@
 
 <!-- 5. Сквозной аудит воронки -->
 <section class="audit">
-  <div class="container">
-    <h2 class="section-title reveal">Сквозной аудит воронки</h2>
-    <ul class="audit-list">
-      <li class="reveal">Путь от объявления до заявки</li>
-      <li class="reveal">Скорость реакции на обращение</li>
-      <li class="reveal">Качество работы с заявкой</li>
-      <li class="reveal">Follow-up по молчащему клиенту</li>
-      <li class="reveal">Совпадение обещания в рекламе и реальности</li>
-    </ul>
-    <div class="audit-highlight reveal">
-      <p>Главное отличие от рынка — я слежу за воронкой дальше заявки, до момента, когда клиент платит.</p>
+  <div class="container audit-grid">
+    <div class="audit-content">
+      <h2 class="section-title reveal audit-title">Я слежу за деньгами дальше, чем другие</h2>
+      <div class="audit-list">
+        <div class="audit-item">
+          <h3>Скорость реакции на заявку</h3>
+          <p>Первые 5 минут решают. Если не перезвонили быстро — клиент уже у конкурента.</p>
+        </div>
+        <div class="audit-item">
+          <h3>Качество работы с обращением</h3>
+          <p>Слушаю записи звонков и смотрю — ответили по существу или отправили думать дальше.</p>
+        </div>
+        <div class="audit-item">
+          <h3>Совпадение рекламы и реальности</h3>
+          <p>Если объявление обещает одно, а менеджер говорит другое — деньги потрачены впустую.</p>
+        </div>
+        <div class="audit-item">
+          <h3>Анализ конкурентов</h3>
+          <p>Смотрю как рекламируются конкуренты — какие офферы используют, где их слабые места, и как на этом фоне выглядеть выигрышнее.</p>
+        </div>
+      </div>
+    </div>
+    <div class="audit-photo-col">
+      <div class="photo-frame reveal-photo">
+        <img src="photo-audit-crop.png" alt="Даниил Сахаров" class="photo-placeholder">
+      </div>
     </div>
   </div>
 </section>
@@ -752,6 +872,30 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   revealEls.forEach(el => observer.observe(el));
+
+  // Approach block: lines draw + columns rise in
+  const approachGrid = document.querySelector('.approach-grid');
+  const approachObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        approachObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  if (approachGrid) approachObserver.observe(approachGrid);
+
+  // Audit block: items rise in one by one
+  const auditList = document.querySelector('.audit-list');
+  const auditObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        auditObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  if (auditList) auditObserver.observe(auditList);
 
   // Form -> redirect to Telegram with prefilled message
   const form = document.getElementById('lead-form');
