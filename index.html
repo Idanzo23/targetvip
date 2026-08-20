@@ -234,9 +234,6 @@
     display: block;
   }
 
-  .pains-grid .photo-frame {
-    top: 2.5cm;
-  }
 
   .pains-grid .photo-placeholder {
     object-position: center bottom;
@@ -291,23 +288,46 @@
   .pains-grid {
     display: grid;
     grid-template-columns: minmax(360px, 700px) 1fr;
-    gap: 80px;
+    column-gap: 80px;
+    row-gap: 0;
     align-items: stretch;
     max-width: 1240px;
   }
 
-  .pains-content {
-    text-align: center;
+  .pains-grid .photo-frame {
+    grid-column: 1;
+    grid-row: 1 / 3;
   }
 
   .pains-title {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: 100%;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 24px;
+    margin-bottom: 1cm;
+  }
+
+  .pains-content {
+    grid-column: 2;
+    grid-row: 2;
+    text-align: center;
   }
 
   .pains-lead {
-    display: block;
-    margin-bottom: 4px;
+    display: inline-block;
+    background: var(--text);
+    color: var(--bg);
+    padding: 8px 32px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .pains-lead:hover {
+    transform: scale(1.08);
   }
 
   .pains-sub {
@@ -628,10 +648,14 @@
     .included-grid { grid-template-columns: 1fr; }
 
     .pains-grid { grid-template-columns: 1fr; gap: 32px; }
+    .pains-grid .photo-frame,
+    .pains-title,
+    .pains-content { grid-column: auto; grid-row: auto; }
+    .pains-grid .photo-frame { margin-left: auto; margin-right: auto; }
 
     .audit-grid { grid-template-columns: 1fr; gap: 32px; }
     .audit-photo-col { min-height: 0; }
-    .audit-grid .photo-frame { position: static; max-width: 280px; top: auto; right: auto; }
+    .audit-grid .photo-frame { position: static; max-width: 280px; top: auto; right: auto; margin-left: 1cm; }
 
     .process-item {
       grid-template-columns: 48px 1fr;
@@ -695,11 +719,8 @@
 <!-- 3. Боли клиента -->
 <section class="pains">
   <div class="container pains-grid">
-    <div class="photo-frame reveal-photo">
-      <img src="photo-pains.png" alt="Даниил Сахаров" class="photo-placeholder">
-    </div>
+    <h2 class="section-title reveal pains-title"><span class="pains-lead">Почему</span><span class="pains-sub">реклама не окупается — и кто за это отвечает</span></h2>
     <div class="pains-content">
-      <h2 class="section-title reveal pains-title"><span class="pains-lead">Проблемы</span><span class="pains-sub">с которыми ко мне приходят клиенты чаще всего</span></h2>
       <div class="pain-grid">
         <div class="pain-card reveal">
           <span class="pain-numeral">I</span>
@@ -722,6 +743,9 @@
           <p>Внимание распределено между клиентами — и на вас его остаётся немного.</p>
         </div>
       </div>
+    </div>
+    <div class="photo-frame reveal-photo">
+      <img src="photo-pains.png" alt="Даниил Сахаров" class="photo-placeholder">
     </div>
   </div>
 </section>
