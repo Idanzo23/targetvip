@@ -589,6 +589,54 @@
     border-top: 1px solid var(--text);
   }
 
+  .included {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .inc-item {
+    list-style: none;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    cursor: default;
+  }
+
+  .inc-title {
+    font-size: 15.5px;
+    color: var(--text);
+    display: block;
+  }
+
+  .inc-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    display: none;
+    margin-top: 6px;
+    transition: opacity .2s ease;
+  }
+
+  /* Десктоп — показываем при наведении */
+  @media (min-width: 641px) {
+    .inc-item:hover .inc-desc {
+      display: block;
+      opacity: 1;
+    }
+    .inc-item:hover .inc-title {
+      color: var(--muted);
+    }
+  }
+
+  /* Мобиль — описание всегда видно */
+  @media (max-width: 640px) {
+    .inc-desc {
+      display: block;
+      opacity: 1;
+    }
+  }
+
   /* ---------- Diagnostics (test teaser) ---------- */
   .wrap {
     max-width: 1080px;
@@ -686,6 +734,7 @@
 
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .photo-frame { height: auto; width: 100%; max-width: 280px; }
+    .about-grid .photo-frame { max-width: 92%; margin-left: auto; margin-right: auto; }
     .photo-placeholder { height: auto; width: 100%; }
 
     .stats { grid-template-columns: 1fr; gap: 24px; }
@@ -698,7 +747,7 @@
     .pains-grid .photo-frame,
     .pains-title,
     .pains-content { grid-column: auto; grid-row: auto; }
-    .pains-grid .photo-frame { margin-left: auto; margin-right: auto; top: auto; }
+    .pains-grid .photo-frame { margin-left: auto; margin-right: auto; top: auto; max-width: 100%; }
 
     .audit-grid { grid-template-columns: 1fr; gap: 32px; }
     .audit-photo-col { min-height: 0; }
@@ -885,16 +934,40 @@
 <section class="included">
   <div class="container">
     <h2 class="section-title reveal">Что входит</h2>
-    <div class="included-grid">
-      <div class="reveal">Анализ ниши</div>
-      <div class="reveal">Аудит воронки</div>
-      <div class="reveal">Стратегия</div>
-      <div class="reveal">Ведение кампаний</div>
-      <div class="reveal">Тестирование креативов</div>
-      <div class="reveal">Еженедельный отчёт</div>
-      <div class="reveal">Месячный созвон</div>
-      <div class="reveal">Прямая связь</div>
-    </div>
+    <ul class="included">
+      <li class="inc-item">
+        <span class="inc-title">Анализ ниши</span>
+        <span class="inc-desc">Изучаю ваш рынок, конкурентов и целевую аудиторию до запуска рекламы</span>
+      </li>
+      <li class="inc-item">
+        <span class="inc-title">Аудит воронки</span>
+        <span class="inc-desc">Прохожу путь клиента сам — от объявления до заявки — и нахожу где теряются люди</span>
+      </li>
+      <li class="inc-item">
+        <span class="inc-title">Стратегия</span>
+        <span class="inc-desc">Разрабатываю план на месяц с конкретными гипотезами по аудиториям и креативам</span>
+      </li>
+      <li class="inc-item">
+        <span class="inc-title">Ведение кампаний</span>
+        <span class="inc-desc">Настраиваю, запускаю и постоянно оптимизирую рекламу в течение месяца</span>
+      </li>
+      <li class="inc-item">
+        <span class="inc-title">Тестирование креативов</span>
+        <span class="inc-desc">Регулярно тестирую новые объявления и аудитории — минимум 2-3 итерации в месяц</span>
+      </li>
+      <li class="inc-item">
+        <span class="inc-title">Еженедельный отчёт</span>
+        <span class="inc-desc">Каждую неделю присылаю цифры с объяснением что происходит и что делаем дальше</span>
+      </li>
+      <li class="inc-item">
+        <span class="inc-title">Месячный созвон</span>
+        <span class="inc-desc">Раз в месяц обсуждаем стратегию вживую — не отчёт, а разговор о вашем бизнесе</span>
+      </li>
+      <li class="inc-item">
+        <span class="inc-title">Прямая связь</span>
+        <span class="inc-desc">Пишете напрямую мне — без менеджеров и задержек</span>
+      </li>
+    </ul>
     <p class="included-note reveal">Стоимость обсуждаем на консультации. Разбор воронки — до начала работы и без оплаты.</p>
   </div>
 </section>
@@ -952,7 +1025,7 @@
     <h2 class="section-title reveal">Бесплатная консультация</h2>
     <p class="lead reveal">Оставьте имя и контакт — напишу в Telegram, чтобы договориться о разборе воронки.</p>
 
-    <form id="lead-form" class="reveal">
+    <form id="main-contact-form" class="reveal">
       <div class="field">
         <label for="name">Имя</label>
         <input type="text" id="name" name="name" required autocomplete="name">
@@ -962,7 +1035,10 @@
         <input type="text" id="contact" name="contact" required autocomplete="tel">
       </div>
       <p class="form-note">Отправляя данные, вы соглашаетесь на обработку персональных данных.</p>
-      <button type="submit" class="btn">Отправить</button>
+      <button type="submit" class="btn" onclick="submitMainForm(event)">Отправить</button>
+      <div id="main-form-msg" style="font-size:13px;color:#c0392b;margin-top:8px"></div>
+      <div style="font-size:13px;color:#9A9C93;margin:16px 0;letter-spacing:.1em;text-transform:uppercase">или</div>
+      <a href="https://t.me/ddanyatarget23" target="_blank" style="display:inline-block;padding:17px 34px;background:transparent;border:0.5px solid #14150F;color:#14150F;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;font-family:inherit;transition:background .25s ease,color .25s ease" onmouseover="this.style.background='#14150F';this.style.color='#FBFBF9'" onmouseout="this.style.background='transparent';this.style.color='#14150F'">Написать в Telegram →</a>
     </form>
 
     <div class="contact-footer reveal">
@@ -1015,17 +1091,6 @@
     });
   }, { threshold: 0.15 });
   if (auditList) auditObserver.observe(auditList);
-
-  // Form -> redirect to Telegram with prefilled message
-  const form = document.getElementById('lead-form');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const contact = document.getElementById('contact').value.trim();
-    const message = `Заявка с сайта\nИмя: ${name}\nКонтакт: ${contact}`;
-    const url = `https://t.me/ddanyatarget23?text=${encodeURIComponent(message)}`;
-    window.location.href = url;
-  });
 </script>
 
 <div id="test-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;overflow-y:auto">
@@ -1187,6 +1252,42 @@ function submitForm(e){
 document.getElementById('test-modal').addEventListener('click',function(e){
   if(e.target===this) closeTest();
 });
+</script>
+
+<script>
+function submitMainForm(e){
+  e.preventDefault();
+  var form = document.getElementById('main-contact-form');
+  var name = form.querySelector('[name="name"]').value.trim();
+  var contact = form.querySelector('[name="contact"]').value.trim();
+
+  if(!name || !contact){
+    document.getElementById('main-form-msg').textContent = 'Заполните все поля';
+    return;
+  }
+
+  var text = '🔔 Новая заявка с сайта!\n\n' +
+    '👤 Имя: ' + name + '\n' +
+    '📱 Контакт: ' + contact;
+
+  var TOKEN = 'ТВОЙ_НОВЫЙ_ТОКЕН';
+  var CHAT_ID = '1033648716';
+
+  fetch('https://api.telegram.org/bot' + TOKEN + '/sendMessage', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: text
+    })
+  }).then(function(r){
+    if(r.ok){
+      form.innerHTML = '<p style="font-size:17px;color:#14150F">Спасибо — свяжусь с вами в течение дня.</p>';
+    } else {
+      document.getElementById('main-form-msg').textContent = 'Что-то пошло не так. Попробуйте ещё раз.';
+    }
+  });
+}
 </script>
 
 </body>
