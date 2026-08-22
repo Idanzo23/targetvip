@@ -101,6 +101,26 @@
     color: var(--btn-bg);
   }
 
+  .btn-test {
+    background: transparent;
+    border: 1px solid #14150F;
+    color: #14150F;
+    padding: 17px 34px;
+    font-size: 12.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    display: block;
+    width: fit-content;
+    margin: 16px auto 0;
+  }
+
+  .btn-test:hover {
+    background: #14150F;
+    color: #FBFBF9;
+  }
+
   .btn-caption {
     display: block;
     margin-top: 14px;
@@ -297,6 +317,7 @@
   .pains-grid .photo-frame {
     grid-column: 1;
     grid-row: 1 / 3;
+    top: 2.5cm;
   }
 
   .pains-title {
@@ -568,6 +589,32 @@
     border-top: 1px solid var(--text);
   }
 
+  /* ---------- Diagnostics (test teaser) ---------- */
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .sec-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .sec-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 640px) {
+    .test-grid { grid-template-columns: 1fr !important; }
+  }
+
   /* ---------- Form ---------- */
   .form-section .section-title { margin-bottom: 20px; }
   .form-section .lead { margin-bottom: 56px; }
@@ -651,7 +698,7 @@
     .pains-grid .photo-frame,
     .pains-title,
     .pains-content { grid-column: auto; grid-row: auto; }
-    .pains-grid .photo-frame { margin-left: auto; margin-right: auto; }
+    .pains-grid .photo-frame { margin-left: auto; margin-right: auto; top: auto; }
 
     .audit-grid { grid-template-columns: 1fr; gap: 32px; }
     .audit-photo-col { min-height: 0; }
@@ -681,6 +728,7 @@
     <h1 class="reveal">Я работаю с вашим бизнесом — не с вашим рекламным кабинетом</h1>
     <p class="lead reveal">Реклама — это последний шаг. До неё я изучаю ваш рынок, конкурентов и то, где деньги теряются ещё до клика.</p>
     <a href="https://t.me/ddanyatarget23" target="_blank" rel="noopener" class="btn reveal">Бесплатная консультация</a>
+    <button onclick="openTest()" class="btn-test">Пройти тест — узнать где теряются клиенты</button>
     <span class="btn-caption reveal">Разбор воронки — до начала работы</span>
   </div>
 </section>
@@ -851,6 +899,53 @@
   </div>
 </section>
 
+<section>
+  <div class="wrap reveal">
+    <div class="sec-label">Диагностика</div>
+    <div class="test-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+
+      <div>
+        <h2 class="section-title" style="margin-bottom:0">Не знаете где теряются ваши клиенты?</h2>
+        <p class="sec-lede" style="margin-top:16px">8 вопросов — и вы увидите в какой зоне проблема: аналитика, обработка заявок или контроль специалиста.</p>
+
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:6px;height:6px;border-radius:50%;background:#14150F;margin-top:8px;flex-shrink:0"></div>
+            <span style="font-size:15px;color:var(--muted)">Бесплатно — никаких обязательств</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:6px;height:6px;border-radius:50%;background:#14150F;margin-top:8px;flex-shrink:0"></div>
+            <span style="font-size:15px;color:var(--muted)">Результат сразу — увидите в какой зоне проблема</span>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:6px;height:6px;border-radius:50%;background:#14150F;margin-top:8px;flex-shrink:0"></div>
+            <span style="font-size:15px;color:var(--muted)">2 минуты — 8 вопросов без воды</span>
+          </div>
+        </div>
+
+        <button onclick="openTest()" style="margin-top:40px;background:#14150F;color:#FBFBF9;border:none;padding:17px 34px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:opacity .25s ease">Пройти тест →</button>
+      </div>
+
+      <div style="background:#F1F1EC;padding:40px;border-radius:4px">
+        <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:24px">Что вы узнаете</div>
+        <div style="border-top:1px solid var(--line);padding:20px 0">
+          <div style="font-size:16px;color:var(--text);margin-bottom:6px">Где теряются деньги</div>
+          <div style="font-size:14px;color:var(--muted)">В аналитике, обработке заявок или в работе специалиста</div>
+        </div>
+        <div style="border-top:1px solid var(--line);padding:20px 0">
+          <div style="font-size:16px;color:var(--text);margin-bottom:6px">Почему заявки не конвертируются</div>
+          <div style="font-size:14px;color:var(--muted)">Реклама здесь часто ни при чём — проблема глубже</div>
+        </div>
+        <div style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0">
+          <div style="font-size:16px;color:var(--text);margin-bottom:6px">Что делать первым делом</div>
+          <div style="font-size:14px;color:var(--muted)">Конкретный следующий шаг под вашу ситуацию</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- 8. Форма заявки -->
 <section class="form-section" id="form">
   <div class="container">
@@ -931,6 +1026,167 @@
     const url = `https://t.me/ddanyatarget23?text=${encodeURIComponent(message)}`;
     window.location.href = url;
   });
+</script>
+
+<div id="test-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;overflow-y:auto">
+  <div style="background:#FBFBF9;max-width:600px;margin:60px auto;padding:48px;position:relative;border-radius:4px">
+    <button onclick="closeTest()" style="position:absolute;top:20px;right:24px;background:none;border:none;font-size:24px;cursor:pointer;color:#6E7066">×</button>
+    <div id="test-inner"></div>
+  </div>
+</div>
+
+<script>
+var questions = [
+  {type:'open', q:'В какой нише вы тратите деньги на рекламу?', ph:'Например: недвижимость, юридические услуги...'},
+  {type:'open', q:'Какой у вас рекламный бюджет в месяц (в рублях)?', ph:'Например: 50 000'},
+  {type:'choice', q:'Вы можете сказать прямо сейчас — куда ушли деньги за последний месяц рекламы?', opts:['Да, знаю точно по каждому каналу','Примерно понимаю','Вижу только общую сумму расхода','Честно — не знаю'], sc:[3,2,1,0]},
+  {type:'choice', q:'Заявки приходят — но сколько из них реально покупают?', opts:['Знаю точный процент конверсии из заявки в оплату','Примерно каждый третий-четвёртый','Мало, но не считали точно','Заявок мало и покупают редко'], sc:[3,2,1,0]},
+  {type:'choice', q:'Когда последний раз вы слушали как менеджер разговаривает с клиентом по заявке из рекламы?', opts:['Слушаю регулярно','Слушал несколько месяцев назад','Никогда не слушал','У нас нет записей звонков'], sc:[3,1,0,0]},
+  {type:'choice', q:'Что делает ваш таргетолог когда реклама перестаёт работать?', opts:['Сам замечает и предлагает решение','Я замечаю и спрашиваю — тогда объясняет','Говорит "всё нормально, надо подождать"','Я сам не знаю что происходит пока не спрошу','У меня нет таргетолога'], sc:[3,1,0,0,0]},
+  {type:'choice', q:'Вы понимаете почему ваша реклама настроена именно так, а не иначе?', opts:['Да, мы обсуждали стратегию и я понимаю логику','Частично — объясняли но не до конца','Нет, просто доверяю специалисту','Никогда не задумывался об этом'], sc:[3,1,0,0]},
+  {type:'choice', q:'Что для вас сейчас важнее всего в работе с рекламой?', opts:['Понять куда уходит бюджет','Получить больше качественных заявок','Найти надёжного специалиста которому можно доверять'], sc:[0,0,0]}
+];
+
+var cur=0, scores=[], openAnswers=[], selIdx=[];
+
+function openTest(){
+  document.getElementById('test-modal').style.display='block';
+  document.body.style.overflow='hidden';
+  cur=0; scores=[]; openAnswers=[]; selIdx=[];
+  renderQ();
+}
+
+function closeTest(){
+  document.getElementById('test-modal').style.display='none';
+  document.body.style.overflow='';
+}
+
+function renderQ(){
+  var q=questions[cur];
+  var prog=Math.round((cur/questions.length)*100);
+  var html='';
+  html+='<div style="height:3px;background:#E4E4DD;border-radius:2px;margin-bottom:32px"><div style="height:100%;width:'+prog+'%;background:#14150F;border-radius:2px;transition:width .4s"></div></div>';
+  html+='<div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#9A9C93;margin-bottom:12px">Вопрос '+(cur+1)+' из '+questions.length+'</div>';
+  html+='<div style="font-size:20px;font-family:Georgia,serif;color:#14150F;line-height:1.4;margin-bottom:24px">'+q.q+'</div>';
+  if(q.type==='open'){
+    html+='<input id="oi" placeholder="'+q.ph+'" style="width:100%;padding:12px;font-size:15px;border:0.5px solid #E4E4DD;border-radius:4px;background:#FBFBF9;color:#14150F;font-family:inherit;box-sizing:border-box" value="'+(openAnswers[cur]||'')+'">';
+  } else {
+    q.opts.forEach(function(o,i){
+      var sel=(selIdx[cur]===i)?'background:#14150F;color:#FBFBF9;border-color:#14150F':'background:#FBFBF9;color:#14150F;border-color:#E4E4DD';
+      html+='<button onclick="selectOpt('+i+')" style="display:block;width:100%;text-align:left;padding:12px 16px;margin:8px 0;'+sel+';border:0.5px solid;border-radius:4px;cursor:pointer;font-size:15px;font-family:inherit">'+o+'</button>';
+    });
+  }
+  html+='<div id="er" style="color:#c0392b;font-size:13px;min-height:18px;margin-top:8px"></div>';
+  html+='<div style="display:flex;justify-content:space-between;margin-top:28px">';
+  if(cur>0) html+='<button onclick="goBack()" style="background:none;border:0.5px solid #E4E4DD;padding:12px 24px;border-radius:4px;cursor:pointer;font-size:14px;font-family:inherit;color:#6E7066">← Назад</button>';
+  else html+='<span></span>';
+  html+='<button onclick="goNext()" style="background:#14150F;color:#FBFBF9;border:none;padding:12px 28px;border-radius:4px;cursor:pointer;font-size:14px;font-family:inherit">'+(cur===questions.length-1?'Узнать результат →':'Далее →')+'</button>';
+  html+='</div>';
+  document.getElementById('test-inner').innerHTML=html;
+}
+
+function selectOpt(i){
+  selIdx[cur]=i;
+  renderQ();
+}
+
+function goBack(){
+  cur--;
+  renderQ();
+}
+
+function goNext(){
+  var q=questions[cur];
+  if(q.type==='open'){
+    var v=document.getElementById('oi').value.trim();
+    if(!v){document.getElementById('er').textContent='Введите ответ';return;}
+    openAnswers[cur]=v;
+    scores[cur]=0;
+  } else {
+    if(selIdx[cur]===undefined){document.getElementById('er').textContent='Выберите вариант';return;}
+    scores[cur]=q.sc[selIdx[cur]];
+  }
+  cur++;
+  if(cur>=questions.length){showResult();return;}
+  renderQ();
+}
+
+function showResult(){
+  var s3 = scores[2]||0;
+  var s4 = scores[3]||0;
+  var s5 = scores[4]||0;
+  var s6 = scores[5]||0;
+  var s7 = scores[6]||0;
+
+  var title, body, cta;
+
+  if(s3 + s4 < 2){
+    title = 'Вы платите за рекламу — но не знаете окупается ли она';
+    body = 'Нет данных по конверсии и расходам — значит решения принимаются на ощущениях, а не на цифрах. Бюджет может сливаться годами и выглядеть при этом нормально. Первый шаг — выстроить сквозную аналитику от клика до оплаты.';
+    cta = 'Разберём вашу аналитику на бесплатной консультации — покажу где именно теряются данные и что с этим делать.';
+  } else if(s5 === 0){
+    title = 'Реклама приводит людей — но они теряются после заявки';
+    body = 'Никто не проверяет что происходит после клика. По статистике до 40% заявок теряется на этапе первого звонка — менеджер не перезвонил вовремя, ответил не по существу или не сделал повторное касание. Реклама здесь ни при чём.';
+    cta = 'На бесплатной консультации пройдём путь вашего клиента вместе — от объявления до звонка — и найдём где он уходит.';
+  } else if(s6 + s7 < 2){
+    title = 'Вы платите специалисту — но не контролируете что он делает';
+    body = 'Таргетолог не проявляет инициативу и вы не понимаете стратегию. Это значит вы зависите от его добросовестности, а не от системы. Когда нет прозрачности — деньги уходят тихо и без очевидных причин.';
+    cta = 'Разберём на консультации как выстроить контроль над рекламой — чтобы вы понимали что происходит без необходимости вникать в детали каждый день.';
+  } else {
+    title = 'Система есть — но есть куда расти';
+    body = 'Вы понимаете свою рекламу и контролируете результат. Следующий шаг — конкурентный анализ и масштабирование того что уже работает. Хороший фундамент позволяет расти быстро если правильно расставить приоритеты.';
+    cta = 'Обсудим на консультации как масштабировать то что уже работает — и где есть точки роста которые вы пока не используете.';
+  }
+
+  var answersText = '';
+  questions.forEach(function(q, i){
+    var ans = '';
+    if(q.type === 'open') ans = openAnswers[i] || '—';
+    else if(selIdx[i] !== undefined) ans = q.opts[selIdx[i]];
+    else ans = '—';
+    answersText += q.q + ': ' + ans + '\n';
+  });
+
+  var html = '';
+  html += '<div style="height:3px;background:#14150F;border-radius:2px;margin-bottom:32px"></div>';
+  html += '<div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#9A9C93;margin-bottom:12px">Результат теста</div>';
+  html += '<div style="font-size:22px;font-family:Georgia,serif;color:#14150F;margin-bottom:16px;line-height:1.3">' + title + '</div>';
+  html += '<div style="font-size:15px;color:#6E7066;line-height:1.65;margin-bottom:20px">' + body + '</div>';
+  html += '<div style="font-size:15px;color:#14150F;line-height:1.65;margin-bottom:32px;font-style:italic">' + cta + '</div>';
+  html += '<div style="border-top:1px solid #E4E4DD;padding-top:28px">';
+  html += '<div style="font-size:16px;font-family:Georgia,serif;color:#14150F;margin-bottom:20px">Хотите разобрать вашу воронку лично?</div>';
+  html += '<div style="font-size:14px;color:#6E7066;margin-bottom:20px">Оставьте контакт — свяжусь в течение дня.</div>';
+  html += '<form id="contact-form" onsubmit="submitForm(event)">';
+  html += '<input name="name" placeholder="Ваше имя" required style="width:100%;padding:12px;font-size:15px;border:0.5px solid #E4E4DD;border-radius:4px;background:#FBFBF9;color:#14150F;font-family:inherit;box-sizing:border-box;margin-bottom:12px">';
+  html += '<input name="contact" placeholder="Телефон или Telegram" required style="width:100%;padding:12px;font-size:15px;border:0.5px solid #E4E4DD;border-radius:4px;background:#FBFBF9;color:#14150F;font-family:inherit;box-sizing:border-box;margin-bottom:20px">';
+  html += '<input type="hidden" name="answers" value="' + answersText.replace(/"/g,"&quot;") + '">';
+  html += '<input type="hidden" name="result" value="' + title.replace(/"/g,"&quot;") + '">';
+  html += '<button type="submit" style="background:#14150F;color:#FBFBF9;border:none;padding:14px 32px;border-radius:4px;cursor:pointer;font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-family:inherit">Записаться на консультацию →</button>';
+  html += '<div id="form-msg" style="font-size:13px;margin-top:12px;color:#6E7066"></div>';
+  html += '</form></div>';
+  document.getElementById('test-inner').innerHTML = html;
+}
+
+function submitForm(e){
+  e.preventDefault();
+  var form = document.getElementById('contact-form');
+  var data = new FormData(form);
+  fetch('https://formspree.io/f/mnparawj',{
+    method:'POST',
+    body:data,
+    headers:{'Accept':'application/json'}
+  }).then(function(r){
+    if(r.ok){
+      document.getElementById('test-inner').innerHTML = '<div style="text-align:center;padding:40px 0"><div style="font-size:22px;font-family:Georgia,serif;color:#14150F;margin-bottom:16px">Спасибо — контакт получен</div><div style="font-size:15px;color:#6E7066">Свяжусь с вами в течение дня и разберём вашу воронку подробно.</div></div>';
+    } else {
+      document.getElementById('form-msg').textContent = 'Что-то пошло не так. Попробуйте ещё раз.';
+    }
+  });
+}
+
+document.getElementById('test-modal').addEventListener('click',function(e){
+  if(e.target===this) closeTest();
+});
 </script>
 
 </body>
